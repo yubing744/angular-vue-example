@@ -20,7 +20,7 @@ module.exports = angular.module("main", [
 	.service("rootStore", function(){
 		return new Vuex.Store({})
 	})
-	.service("app", ["rootStore", "Layout", function(rootStore, Layout){
+	.service("rootView", ["rootStore", "Layout", function(rootStore, Layout){
 		var app = new Vue({
 			el: "#app",
 			store: rootStore,
