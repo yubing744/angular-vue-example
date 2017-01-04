@@ -1,0 +1,5 @@
+export const SIDEBAR_ADD_ITEM = "SIDEBAR_ADD_ITEM";
+
+export const HEADER_SET_TITLE = "HEADER_SET_TITLE";
+
+export const SWITCH_MAIN_TO = "SWITCH_MAIN_TO";

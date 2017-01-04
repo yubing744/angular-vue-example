@@ -3,12 +3,29 @@ import log from "utils/log";
 
 import angular from "angular-kernel";
 
+import store from "./stores"
+
+import UserListView from "./views/UserListView"
+
 module.exports = angular.module("user", [
         "main"
     ])
-    .service("userStore", ["rootStore", function(rootStore){
-		return new Vuex.Store({})
+    .config(["routeProvider", function(routeProvider){
+        routeProvider.register({
+            path: "/users",
+            component: UserListView
+        });
     }])
-	.run([function(){
-		log.info("user run!");
+    .run(["rootStore", "headerManager", "mainManager", function(rootStore, headerManager, mainManager){
+        log.info("user run!");
+
+        headerManager.setTitle("用户模块2");
+        rootStore.registerModule("user", store);
+
+        mainManager.registerItems([
+            {
+                title: "用户列表",
+                href: "/users"
+            }
+        ]);
     }]);

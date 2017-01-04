@@ -22,7 +22,7 @@ html, body{
     float: left;
     height: 400px;
     width: 300px;
-    background: blue;
+    background: white;
     margin-left: -300px;
     position: relative;
 }
