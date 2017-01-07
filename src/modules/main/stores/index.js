@@ -26,10 +26,10 @@ const state = {
     mainView: "Not Found"
 }
 
-export default new Vuex.Store({
+export default {
     state,
     mutations,
     actions,
     getters,
     strict: debug
-})
+};

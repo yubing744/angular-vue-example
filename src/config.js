@@ -6,9 +6,7 @@ var dealProtocol = (("https:" == document.location.protocol) ? " https://" : " h
 */
 var cfg = {
     //日志级别
-    logLevel: 2,
-    //SDK URL
-    sdk_base: dealProtocol + "deal-admin.kuick.cn/sdk/v1/",
+    logLevel: 2
 };
 
 /**

@@ -13,9 +13,8 @@ import SideBar from "./views/SideBar";
 import Main from "./views/Main.vue";
 import Footer from "./views/Footer.vue";
 
-import store from "./stores"
-
 import RouteProvider from "./services/provider/RouteProvider";
+import StoreProvider from "./services/provider/StoreProvider";
 
 import HeaderManager from "./services/HeaderManager";
 import SideBarManager from "./services/SideBarManager";
@@ -26,14 +25,13 @@ module.exports = angular.module("main", [
 		layout.name
 	])
 	.provider("route", RouteProvider)
-	.service("rootStore", function(){
-		return store;
-	})
-	.service("rootView", ["rootStore", "route", "Layout", function(rootStore, route, Layout){
+	.provider("store", StoreProvider)
+
+	.service("rootView", ["store", "route", "Layout", function(store, route, Layout){
 		var app = new Vue({
 			el: "#app",
 			router: route.getRouter(),
-			store: rootStore,
+			store: store.getStore(),
 			render: function(h){
 				return (
 					<Layout>
@@ -48,14 +46,14 @@ module.exports = angular.module("main", [
 
 		return app;
 	}])
-	.service("headerManager", ["rootStore", function(rootStore){
-		return new HeaderManager(rootStore);
+	.service("headerManager", ["store", function(store){
+		return new HeaderManager(store.getStore());
 	}])
-	.service("sideBarManager", ["rootStore", function(rootStore){
-		return new SideBarManager(rootStore);
+	.service("sideBarManager", ["store", function(store){
+		return new SideBarManager(store.getStore());
 	}])
-	.service("footerManager", ["rootStore", function(rootStore){
-		return new FooterManager(rootStore);
+	.service("footerManager", ["store", function(store){
+		return new FooterManager(store.getStore());
 	}])
 	.service("mainManager", ["headerManager", "sideBarManager", "footerManager", function(headerManager, sideBarManager, footerManager){
 		return new MainManager(headerManager, sideBarManager, footerManager);
